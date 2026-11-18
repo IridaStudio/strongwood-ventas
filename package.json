@@ -27,14 +27,13 @@
     "yup": "^1.6.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-modal-video": "^1.2.3",
     "eslint": "^9",
-    "eslint-config-next": "15.2.4",
+    "eslint-config-next": "16.4.6",
     "typescript": "^5"
   }
 }
