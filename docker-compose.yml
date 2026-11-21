@@ -31,6 +31,7 @@ services:
     volumes:
       - image_cache:/app/.next/cache/images
     init: true
+    mem_limit: 512m
     restart: unless-stopped
     stop_grace_period: 30s
     security_opt:
