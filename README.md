@@ -29,8 +29,20 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Servidor (VPS)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+No se despliega en Vercel: corre en el VPS de Irida con Docker Compose, detrás de nginx (contenedor
+`strongwood_ventas_next`). Cómo se despliega y las reglas del servidor están en la
+[guía del VPS](https://github.com/IridaStudio/vps/blob/master/README.md) (repo `IridaStudio/vps`); acá no se copian.
+Lo que más importa al tocar este repo:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **La imagen se arma en la PC, nunca en el VPS:** `bash vps/scripts/desplegar.sh strongwood-ventas` desde la carpeta
+  `iridastudio` ([Cómo desplegar](https://github.com/IridaStudio/vps/blob/master/README.md#cómo-desplegar)). Si cambia
+  solo el `docker-compose.yml`, no hace falta armar imagen
+  ([Si cambia solo el compose](https://github.com/IridaStudio/vps/blob/master/README.md#si-cambia-solo-el-compose)).
+- **Tope de memoria:** el `mem_limit` de 512 MB del compose es regla del servidor: no se saca ni se cambia sin decidirlo
+  en la guía ([Topes de memoria](https://github.com/IridaStudio/vps/blob/master/README.md#topes-de-memoria)). Hoy usa
+  unos 50-170 MB.
+- **La receta de imágenes:** solo WebP y `deviceSizes` hasta 1920 en `next.config.ts`, y la caché de `/_next/image` en
+  el volumen `strongwood-ventas-image-cache`. Es la receta que copiaron las otras webs con fotos: con AVIF la memoria
+  crecía sin parar. No volver a poner AVIF.
